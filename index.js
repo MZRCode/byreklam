@@ -165,12 +165,12 @@ if(interaction.customId === "papara") {
   .addFields(
     {
       name: "Papara No:",
-      value: "1083621672",
+      value: "SIZIN PAPARA NONUZ",
       inline: true
     },
     {
       name: "Ad Soyad:",
-      value: "K.. D..",
+      value: "AD SOYAD",
       inline: true
     },
   )
@@ -185,12 +185,12 @@ if(interaction.customId === "ininal") {
   .addFields(
     {
       name: "İninal No:",
-      value: "1393465379741",
+      value: "SISIN ININAL HESAP NUMARANIZ",
       inline: true
     },
     {
       name: "Ad Soyad:",
-      value: "K.. D..",
+      value: "AD SOYAD",
       inline: true
     },
   )
@@ -429,7 +429,7 @@ if(interaction.customId === "kaydet") {
       return interaction.reply({ content: "Reklam Log kanalı ayarlanmamış!", ephemeral: true });
     }
   
-    interaction.reply({ content: `Başarıyla <#${logChannelId}> kanalına gönderildi!`, ephemeral: true });
+    interaction.reply({ content: `<:check:904101655316947024> Başarıyla <#${logChannelId}> kanalına gönderildi!`, ephemeral: true });
   }
 
     const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Kaydedildi!" })
