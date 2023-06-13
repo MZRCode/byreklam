@@ -3,8 +3,8 @@ const db = require("croxydb");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("kanal-sıfırla")
-    .setDescription("Reklam LOG kanalını sıfırlar"),
+    .setName("log-sıfırla")
+    .setDescription("Reklam Log kanalını sıfırlar"),
   /**
    * @param {Client} client
    * @param {ChatInputCommandInteraction} interaction
