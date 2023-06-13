@@ -3,12 +3,12 @@ const db = require("croxydb");
 
 module.exports = {
   data: new SlashCommandBuilder()
-    .setName("kanal-ayarla")
+    .setName("log-ayarla")
     .setDescription("Reklam LOG Kanalını Ayarlarsınız")
     .addChannelOption((options) =>
     options
       .setName("kanal")
-      .setDescription("LOG kanalı olarak ayarlanacak kanal")
+      .setDescription("Log kanalı olarak ayarlanacak kanal")
       .addChannelTypes(ChannelType.GuildText)
       .setRequired(true)
   ),
