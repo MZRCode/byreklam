@@ -29,7 +29,7 @@ module.exports = {
       .setDescription("Reklam Log kanalı başarıyla sıfırlandı!")
       .setColor("#0BF3B7")
       .setTimestamp()
-      .setFooter({ text:  `Ayarlamak için /kanal-ayarla` })
+      .setFooter({ text:  `Ayarlamak için /log-ayarla` })
 
     interaction.reply({ embeds: [embed], ephemeral: true });
   },
