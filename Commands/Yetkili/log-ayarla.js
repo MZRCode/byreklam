@@ -27,7 +27,7 @@ module.exports = {
       .setDescription(`Reklam Log kanalı ${kanal} olarak ayarlandı!`)
       .setColor("#0BF3B7")
       .setTimestamp()
-      .setFooter({ text: `Sıfırlamak için /kanal-sıfırla` })
+      .setFooter({ text: `Sıfırlamak için /log-sıfırla` })
 
     interaction.reply({ embeds: [embed], ephemeral: true });
 
