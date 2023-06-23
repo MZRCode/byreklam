@@ -68,7 +68,7 @@ client.on('interactionCreate', async (interaction) => {
     );
 
 const embed = new EmbedBuilder()
-.setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+.setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
 .setDescription(`Selam **${interaction.user.username}**, Aşağıdaki paketlerden birini seçip reklamını yaptırıra bilirsin.`)
 .setColor("Blue")
 
@@ -77,12 +77,15 @@ interaction.reply({embeds: [embed], ephemeral: true, components: [reklam1]})
 }
 
 if(interaction.customId === "bronz") {
-
   if (!interaction.guild) return;
 
   const { user, customId, guild } = interaction;
+  const mzrKanalı = db.get(`mzr_${guild.id}`);
+  const açıkKanal = db.get(`mzrdev_${guild.id}`);
 
-  const reklamMzR = db.fetch(`reklammzr_${guild.id}`);
+    if (mzrKanalı) {
+      await interaction.reply({ content: `Mevcut bir ticket kanalın var.\n**Mevcut Kanal:** <#${açıkKanal}>`, ephemeral: true });
+	} else {
 
   const channel = await guild.channels.create({
     name: `${user.username}-reklam`,
@@ -98,6 +101,8 @@ if(interaction.customId === "bronz") {
       },
     ],
   })
+  db.set(`mzrdev_${guild.id}`, channel.id);
+  db.set(`mzr_${guild.id}`, user.id);
 
   const odeme = new ActionRowBuilder()
   .addComponents(
@@ -123,12 +128,13 @@ if(interaction.customId === "bronz") {
   )
 
   const embed = new EmbedBuilder()
-  .setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+  .setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
   .setDescription(`Selam Hoşgeldin **${user.username}**, işlemler için yetkilileri bekleyiniz.\nBirazdan senin ile ilgilenirler.\n\nKişinin Seçtiği: **Bronz Paket**`)
   .setColor("Blue")
 
   interaction.reply({content: `<:check:904101655316947024> | Kanalın başarıyla **açıldı!** Yetkililer ilgilenicek birazdan senin ile.\n<:chat:904102695613374485> | **Kanal:** <#${channel.id}>`, ephemeral: true})
   channel.send({embeds: [embed], content: `<@${interaction.user.id}>`, components: [odeme]})
+  }
 }
 
 if(interaction.customId === "odeme") {
@@ -206,6 +212,13 @@ if(interaction.customId === "demir") {
   const { user, customId, guild } = interaction;
 
   const reklamMzR = db.fetch(`reklammzr_${guild.id}`);
+  
+  const mzrKanalı = db.get(`mzr_${guild.id}`);
+  const açıkKanal = db.get(`mzrdev_${guild.id}`);
+
+    if (mzrKanalı) {
+      await interaction.reply({ content: `Mevcut bir ticket kanalın var.\n**Mevcut Kanal:** <#${açıkKanal}>`, ephemeral: true });
+	} else {
 
   const channel = await guild.channels.create({
     name: `reklam-${user.username}`,
@@ -221,6 +234,8 @@ if(interaction.customId === "demir") {
       },
     ],
   })
+  db.set(`mzrdev_${guild.id}`, channel.id);
+  db.set(`mzr_${guild.id}`, user.id);
 
   const odeme = new ActionRowBuilder()
   .addComponents(
@@ -245,12 +260,13 @@ if(interaction.customId === "demir") {
       .setStyle(ButtonStyle.Secondary)
   )
   const embed = new EmbedBuilder()
-  .setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+  .setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
   .setDescription(`Selam Hoşgeldin **${user.username}**, işlemler için yetkilileri bekleyiniz.\nBirazdan senin ile ilgilenirler.\n\nKişinin Seçtiği: **Demir Paket**`)
   .setColor("Blue")
 
   interaction.reply({content: `<:check:904101655316947024> | Kanalın başarıyla **açıldı!** Yetkililer ilgilenicek birazdan senin ile.\n<:chat:904102695613374485> | **Kanal:** <#${channel.id}>`, ephemeral: true})
   channel.send({embeds: [embed], content: `<@${interaction.user.id}>`, components: [odeme]})
+	}
 }
 if(interaction.customId === "altın") {
 
@@ -259,6 +275,12 @@ if(interaction.customId === "altın") {
   const { user, customId, guild } = interaction;
 
   const reklamMzR = db.fetch(`reklammzr_${guild.id}`);
+  const mzrKanalı = db.get(`mzr_${guild.id}`);
+  const açıkKanal = db.get(`mzrdev_${guild.id}`);
+
+    if (mzrKanalı) {
+      await interaction.reply({ content: `Mevcut bir ticket kanalın var.\n**Mevcut Kanal:** <#${açıkKanal}>`, ephemeral: true });
+	} else {
 
   const channel = await guild.channels.create({
     name: `reklam-${user.username}`,
@@ -274,6 +296,8 @@ if(interaction.customId === "altın") {
       },
     ],
   })
+  db.set(`mzrdev_${guild.id}`, channel.id);
+  db.set(`mzr_${guild.id}`, user.id);
 
   const odeme = new ActionRowBuilder()
   .addComponents(
@@ -299,12 +323,13 @@ if(interaction.customId === "altın") {
   )
 
   const embed = new EmbedBuilder()
-  .setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+  .setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
   .setDescription(`Selam Hoşgeldin **${user.username}**, işlemler için yetkilileri bekleyiniz.\nBirazdan senin ile ilgilenirler.\n\nKişinin Seçtiği: **Altın Paket**`)
   .setColor("Blue")
 
   interaction.reply({content: `<:check:904101655316947024> | Kanalın başarıyla **açıldı!** Yetkililer ilgilenicek birazdan senin ile.\n<:chat:904102695613374485> | **Kanal:** <#${channel.id}>`, ephemeral: true})
   channel.send({embeds: [embed], content: `<@${interaction.user.id}>`, components: [odeme]})
+	}
 }
 if(interaction.customId === "elmas") {
 
@@ -313,6 +338,12 @@ if(interaction.customId === "elmas") {
   const { user, customId, guild } = interaction;
 
   const reklamMzR = db.fetch(`reklammzr_${guild.id}`);
+  const mzrKanalı = db.get(`mzr_${guild.id}`);
+  const açıkKanal = db.get(`mzrdev_${guild.id}`);
+
+    if (mzrKanalı) {
+      await interaction.reply({ content: `Mevcut bir ticket kanalın var.\n**Mevcut Kanal:** <#${açıkKanal}>`, ephemeral: true });
+	} else {
 
   const channel = await guild.channels.create({
     name: `reklam-${user.username}`,
@@ -328,6 +359,8 @@ if(interaction.customId === "elmas") {
       },
     ],
   })
+  db.set(`mzrdev_${guild.id}`, channel.id);
+  db.set(`mzr_${guild.id}`, user.id);
 
   const odeme = new ActionRowBuilder()
   .addComponents(
@@ -353,12 +386,13 @@ if(interaction.customId === "elmas") {
   )
 
   const embed = new EmbedBuilder()
-  .setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+  .setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
   .setDescription(`Selam Hoşgeldin **${user.username}**, işlemler için yetkilileri bekleyiniz.\nBirazdan senin ile ilgilenirler.\n\nKişinin Seçtiği: **Elmas Paket**`)
   .setColor("Blue")
 
   interaction.reply({content: `<:check:904101655316947024> | Kanalın başarıyla **açıldı!** Yetkililer ilgilenicek birazdan senin ile.\n<:chat:904102695613374485> | **Kanal:** <#${channel.id}>`, ephemeral: true})
   channel.send({embeds: [embed], content: `<@${interaction.user.id}>`, components: [odeme]})
+	}
 }
 if(interaction.customId === "ekpaket") {
 
@@ -367,6 +401,12 @@ if(interaction.customId === "ekpaket") {
   const { user, customId, guild } = interaction;
 
   const reklamMzR = db.fetch(`reklammzr_${guild.id}`);
+  const mzrKanalı = db.get(`mzr_${guild.id}`);
+  const açıkKanal = db.get(`mzrdev_${guild.id}`);
+
+    if (mzrKanalı) {
+      await interaction.reply({ content: `Mevcut bir ticket kanalın var.\n**Mevcut Kanal:** <#${açıkKanal}>`, ephemeral: true });
+	} else {
 
   const channel = await guild.channels.create({
     name: `reklam-${user.username}`,
@@ -382,6 +422,8 @@ if(interaction.customId === "ekpaket") {
       },
     ],
   })
+  db.set(`mzrdev_${guild.id}`, channel.id);
+  db.set(`mzr_${guild.id}`, user.id);
 
   const odeme = new ActionRowBuilder()
   .addComponents(
@@ -407,12 +449,13 @@ if(interaction.customId === "ekpaket") {
   )
 
   const embed = new EmbedBuilder()
-  .setAuthor({name: interaction.user.tag, iconURL: interaction.user.avatarURL()})
+  .setAuthor({name: interaction.user.username, iconURL: interaction.user.displayAvatarURL()})
   .setDescription(`Selam Hoşgeldin **${user.username}**, işlemler için yetkilileri bekleyiniz.\nBirazdan senin ile ilgilenirler.\n\nKişinin Seçtiği: **Ek Paket**`)
   .setColor("Blue")
 
   interaction.reply({content: `<:check:904101655316947024> | Kanalın başarıyla **açıldı!** Yetkililer ilgilenicek birazdan senin ile.\n<:chat:904102695613374485> | **Kanal:** <#${channel.id}>`, ephemeral: true})
   channel.send({embeds: [embed], content: `<@${interaction.user.id}>`, components: [odeme]})
+	}
 }
 if(interaction.customId === "kaydet") {
   const { user, member, channel } = interaction;
@@ -432,7 +475,7 @@ if(interaction.customId === "kaydet") {
     interaction.reply({ content: `<:check:904101655316947024> Başarıyla <#${logChannelId}> kanalına gönderildi!`, ephemeral: true });
   }
 
-    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Kaydedildi!" })
+    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Kaydedildi!" })
     let logEmbedDescription = [
       `**Talep ile İlgilenen Yetkili:** ${member}`,
       `**Talebi Açan Kullanıcı:** ${user}`,
@@ -455,10 +498,12 @@ if(interaction.customId === "kaydet") {
 };
 
 if(interaction.customId === "kapat") {
-  const { user, member, channel } = interaction;
+  const { user, member, channel, guild } = interaction;
 
     const logChannelId = await db.fetch(`mzrlog_${interaction.guild.id}`);
     const logChannel = client.channels.cache.get(logChannelId);
+	const mzrKanalı = db.get(`mzr_${guild.id}`);
+	const açıkKanal = db.get(`mzrdev_${guild.id}`);
   
     if (!logChannel) {
       return interaction.reply({ content: "Reklam Log kanalı ayarlanmamış!", ephemeral: true });
@@ -466,7 +511,7 @@ if(interaction.customId === "kapat") {
   
     interaction.reply({ content: `Kanal başarıyla **5 saniye** sonra otomatik olarak kapatılacaktır <:check:904101655316947024>` })
 
-    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.tag}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Talebi Kapattı!" })
+    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Talebi Kapattı!" })
     let logEmbedDescription = [
       `**Talebi Kapatan:** ${user}`,
   ];
@@ -474,6 +519,8 @@ if(interaction.customId === "kapat") {
     logChannel.send({
       embeds: [logEmbed.setTitle("Talep Başarıyla Kapatıldı <:check:904101655316947024>").setDescription(logEmbedDescription.join("\n"))]
       });
+	db.delete(`mzr_${guild.id}`, user.id);
+	db.delete(`mzrdev_${guild.id}`, channel.id);
 
     setTimeout(() => {
      channel.delete()
