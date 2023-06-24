@@ -30,7 +30,7 @@ module.exports = {
                 content: "Bu subCommand artık kullanılmıyor",
                 ephemeral: true
             });
-            subCommandFile.execute(interaction, client);
-        } else command.execute(interaction, client);
+            subCommandFile.execute();
+        } else command.execute();
     }
 }
