@@ -475,7 +475,7 @@ if(interaction.customId === "kaydet") {
     interaction.reply({ content: `<:check:904101655316947024> Başarıyla <#${logChannelId}> kanalına gönderildi!`, ephemeral: true });
   }
 
-    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Kaydedildi!" })
+    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Green").setTimestamp().setFooter({ text: "Başarıyla Kaydedildi!" })
     let logEmbedDescription = [
       `**Talep ile İlgilenen Yetkili:** ${member}`,
       `**Talebi Açan Kullanıcı:** ${user}`,
@@ -511,7 +511,7 @@ if(interaction.customId === "kapat") {
   
     interaction.reply({ content: `Kanal başarıyla **5 saniye** sonra otomatik olarak kapatılacaktır <:check:904101655316947024>` })
 
-    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Blurple").setTimestamp().setFooter({ text: "Başarıyla Talebi Kapattı!" })
+    const logEmbed = new EmbedBuilder().setAuthor({name: `${interaction.user.username}`, iconURL: interaction.user.displayAvatarURL() }).setColor("Green").setTimestamp().setFooter({ text: "Başarıyla Talebi Kapattı!" })
     let logEmbedDescription = [
       `**Talebi Kapatan:** ${user}`,
   ];
