@@ -10,7 +10,7 @@
     "mzr-development",
     "mzr-dev"
   ],
-  "author": "ZeKe#0057",
+  "author": "mzrdev",
   "license": "ISC",
   "dependencies": {
     "ascii-table": "^0.0.9",
@@ -19,6 +19,8 @@
     "discord.js": "14.11.0",
     "glob": "^9.2.1",
     "moment": "^2.29.4",
-    "path": "^0.12.7"
+    "path": "^0.12.7",
+    "mzrdjs": "^0.0.27",
+    "mzrdb": "^1.1.0"
   }
 }
